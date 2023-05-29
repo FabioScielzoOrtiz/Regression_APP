@@ -181,11 +181,11 @@ if file is not None:
             Y_train = df_original.loc[:, Response_selected]
 
             Final_Model = RMSE_models_df_sort.iloc[0,0]
-            st.write('The model used to predict is:', str(Final_Model))
+            st.write('The model used to predict is', str(Final_Model))
             Final_Model.fit(X_train, Y_train)
             Y_pred = Final_Model.predict(new_data)
  
-            st.write('Predicted response:', Y_pred[0])
+            st.write('Predicted response:', str(Y_pred[0]))
 
 
     st.markdown("<br>", unsafe_allow_html=True)
