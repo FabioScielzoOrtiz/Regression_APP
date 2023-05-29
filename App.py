@@ -136,11 +136,11 @@ if file is not None:
                     Random_Simple_Validation = RandomSimpleValidation(k=0.75, metric='MSE', model=model, random_seed=123)
                     Random_Simple_Validation.fit(D=df_original, response_name=Response_selected)
                     Random_Simple_Validation.predict()
-                    MSE_Random_Simple_Validation.append( Random_Simple_Validation.compute_metric() )
+                    RMSE_Random_Simple_Validation.append( np.sqrt( Random_Simple_Validation.compute_metric() ) )
 
-                MSE_models_df = pd.DataFrame({'Model' : Models, 'MSE' : MSE_Random_Simple_Validation})
+                RMSE_models_df = pd.DataFrame({'Model' : Models, 'RMSE' : RMSE_Random_Simple_Validation})
 
-                st.write('MSE models:', MSE_models_df)
+                st.write('RMSE models:', RMSE_models_df)
 
  
 
