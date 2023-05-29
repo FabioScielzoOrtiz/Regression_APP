@@ -86,7 +86,7 @@ if file is not None:
             Y_train = df_original.loc[:, Response_selected]
 
             if Model == 'Linear Regression' :
-                
+                import sklearn
                 from sklearn.linear_model import LinearRegression
                 model = LinearRegression()
                 model.fit(X_train, Y_train)
