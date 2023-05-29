@@ -74,31 +74,11 @@ if file is not None:
 
        st.markdown('### Select Model')
 
-       Model = st.selectbox('Select Model', options=['Linear Regression', 'KNN'], key=3)
+       model_name = st.selectbox('Select Model', options=['Linear Regression', 'KNN'], key=3)
  
        st.markdown("<br>", unsafe_allow_html=True)
        st.markdown("<br>", unsafe_allow_html=True)
 
-#####################################################################################################################################
-
-    if st.sidebar.checkbox('Train the Model'):
-
-        if st.button('Train the Model'):
-            
-            X_train = df_original.loc[:, Predictors_selected]
-            Y_train = df_original.loc[:, Response_selected]
-
-            if Model == 'Linear Regression' :
- 
-                model = LinearRegression()
-                model.fit(X_train, Y_train)
-
-            else :
-                print('Not available model yet')
- 
- 
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
 
 #####################################################################################################################################
 
@@ -116,7 +96,16 @@ if file is not None:
                 new_data = np.array(new_data).reshape(1, -1)
 
                 # Make predictions
-                Y_pred = model.predict(new_data)
+                X_train = df_original.loc[:, Predictors_selected]
+                Y_train = df_original.loc[:, Response_selected]
+
+                if model_name == "Linear Regression" :
+                    model = LinearRegression()
+                    model.fit(X_train, Y_train)
+                    Y_pred = model.predict(new_data)
+                else :
+                    st.write('This model is not available yet')
+               
                 st.write('Predicted output:', Y_pred[0])
 
 
