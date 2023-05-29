@@ -72,22 +72,10 @@ if file is not None:
 
        st.markdown('### Select Model')
 
-       if st.button('Select Model'):
-            Model = st.selectbox('Select Model', options=['Linear Regression', 'KNN'], key=3)
+       Model = st.selectbox('Select Model', options=['Linear Regression', 'KNN'], key=3)
  
        st.markdown("<br>", unsafe_allow_html=True)
        st.markdown("<br>", unsafe_allow_html=True)
-
-#####################################################################################################################################
-
-     # if st.sidebar.checkbox('Cross Validation'):
-
-
-
-
-
-
-
 
 #####################################################################################################################################
 
