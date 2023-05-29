@@ -153,7 +153,7 @@ if file is not None:
 
                 st.write('RMSE models:', RMSE_models_df_sort)
 
-                st.write('The best model according to this validation method is', RMSE_models_df_sort.iloc[0,0])
+                st.write('The best model according to this validation method is', RMSE_models_df_sort.iloc[0,0][0])
 
 
  
