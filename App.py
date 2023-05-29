@@ -84,8 +84,6 @@ if file is not None:
 
     if st.sidebar.checkbox('Make Predictions with the Model'):
 
-      if st.button('Make Predictions'):
-
         st.markdown('### Enter new data')
         new_data = []
         for predictor in Predictors_selected:
@@ -94,18 +92,19 @@ if file is not None:
         # Convert new data to numpy array
         new_data = np.array(new_data).reshape(1, -1)
 
-        # Make predictions
-        X_train = df_original.loc[:, Predictors_selected]
-        Y_train = df_original.loc[:, Response_selected]
+        if st.button('Make Predictions'):
 
-        if model_name == "Linear Regression" :
-            model = LinearRegression()
-            model.fit(X_train, Y_train)
-            Y_pred = model.predict(new_data)
-        else :
-            st.write('This model is not available yet')
+            X_train = df_original.loc[:, Predictors_selected]
+            Y_train = df_original.loc[:, Response_selected]
+ 
+            if model_name == "Linear Regression" :
+               model = LinearRegression()
+               model.fit(X_train, Y_train)
+               Y_pred = model.predict(new_data)
+            else :
+               st.write('This model is not available yet')
                
-        st.write('Predicted output:', Y_pred[0])
+            st.write('Predicted output:', Y_pred[0])
 
 
     st.markdown("<br>", unsafe_allow_html=True)
