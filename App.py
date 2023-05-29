@@ -153,7 +153,7 @@ if file is not None:
 
                 st.write('RMSE models:', RMSE_models_df_sort)
 
-                st.write('The best model according to this validation method is', RMSE_models_df_sort.iloc[0,0])
+                st.write('The best model according to this validation method is', str(RMSE_models_df_sort.iloc[0,0]))
 
 
  
@@ -179,7 +179,7 @@ if file is not None:
             Y_train = df_original.loc[:, Response_selected]
 
             Final_Model = RMSE_models_df_sort.iloc[0,0]
-            st.write('The model that will be used to predict is:', Final_Model)
+            st.write('The model used to predict is:', str(Final_Model))
             Final_Model.fit(X_train, Y_train)
             Y_pred = Final_Model.predict(new_data)
  
