@@ -150,7 +150,7 @@ if file is not None:
                     RMSE_Random_Simple_Validation.append( np.sqrt( Random_Simple_Validation.compute_metric() ) )
                     Hyperparameters.append(model.get_params())
 
-                RMSE_models_df = pd.DataFrame({'Model' : Models, 'Hyperparameters': Hyperparameters, 'RMSE' : RMSE_Random_Simple_Validation})
+                RMSE_models_df = pd.DataFrame({'Model' : Models, 'RMSE' : RMSE_Random_Simple_Validation, 'Hyperparameters': Hyperparameters})
                 RMSE_models_df_sort = RMSE_models_df.sort_values(by='RMSE', ascending=True)
 
                 st.write('RMSE models:', RMSE_models_df_sort)
