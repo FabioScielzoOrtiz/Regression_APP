@@ -63,10 +63,6 @@ if file is not None:
         st.markdown('### Select Response')
         Response_selected = st.selectbox('Select Response', options=df_original.columns, key=2)
 
-        if st.button('Select Response'):
-            Y = df_original.loc[:, Response_selected]
-            st.write(Y)
-
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown("<br>", unsafe_allow_html=True)
 
@@ -76,7 +72,7 @@ if file is not None:
 
        st.markdown('### Select Model')
 
-       if st.button('Select Response'):
+       if st.button('Select Model'):
             Model = st.selectbox('Select Model', options=['Linear Regression', 'KNN'], key=3)
  
        st.markdown("<br>", unsafe_allow_html=True)
