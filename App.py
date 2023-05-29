@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import itertools
-#from sklearn.linear_model import LinearRegression
 import uuid
 import base64 
 
@@ -87,7 +86,8 @@ if file is not None:
             Y_train = df_original.loc[:, Response_selected]
 
             if Model == 'Linear Regression' :
-
+                
+                from sklearn.linear_model import LinearRegression
                 model = LinearRegression()
                 model.fit(X_train, Y_train)
 
