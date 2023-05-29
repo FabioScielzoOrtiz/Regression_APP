@@ -6,7 +6,7 @@ import uuid
 import base64 
 
 from sklearn.linear_model import LinearRegression
-
+from sklearn.neighbors import KNeighborsRegressor
 
 
 ###################################################################
@@ -70,11 +70,38 @@ if file is not None:
 
 #####################################################################################################################################
 
-    if st.sidebar.checkbox('Select Model'):
+    if st.sidebar.checkbox('Model Selection'):
 
-       st.markdown('### Select Model')
+       st.markdown('### Model Selection by cross validation')
 
-       model_name = st.selectbox('Select Model', options=['Linear Regression', 'KNN'], key=3)
+       hyperparameter_tuning = st.selectbox('Do you want hyperparameter tuning ?', options=['Yes', 'Not'], key=3)
+
+       if hyperparameter_tuning == 'Not' :
+            
+            LinearRegression_Model = LinearRegression()
+            KNN_Model = KNeighborsRegressor(n_neighbors=10,  p=2, metric='minkowski')
+
+            Models = [LinearRegression_Model, KNN_Model]
+           
+            cross_validation = st.selectbox('Choose a cross validation algorithm', options=['Simple-NotRandom', 'Simple-Random'], key=3)
+
+            if cross_validation == 'Simple-Random' :
+
+                MSE_RandomSimpleValidation = []
+
+                for model in Models :
+                   
+                    RandomSimpleValidation = RandomSimpleValidation(k=0.75, metric='ECM', model=LinearRegression_Model, random_seed=123)
+                    RandomSimpleValidation.fit(D=df_original, response_name=Response_selected)
+                    RandomSimpleValidation.predict()
+                    MSE_RandomSimpleValidation.append( RandomSimpleValidation.compute_metric() )
+
+                MSE_RandomSimpleValidation
+
+ 
+
+
+
  
        st.markdown("<br>", unsafe_allow_html=True)
        st.markdown("<br>", unsafe_allow_html=True)
