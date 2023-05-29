@@ -86,27 +86,26 @@ if file is not None:
 
       if st.button('Make Predictions'):
 
-                st.markdown('### Enter new data')
-                new_data = []
-                for predictor in Predictors_selected:
-                    value = st.number_input(f"Enter value for {predictor}")
-                    new_data.append(value)
+        st.markdown('### Enter new data')
+        new_data = []
+        for predictor in Predictors_selected:
+            value = st.number_input(f"Enter value for {predictor}")
+            new_data.append(value)
+        # Convert new data to numpy array
+        new_data = np.array(new_data).reshape(1, -1)
 
-                # Convert new data to numpy array
-                new_data = np.array(new_data).reshape(1, -1)
+        # Make predictions
+        X_train = df_original.loc[:, Predictors_selected]
+        Y_train = df_original.loc[:, Response_selected]
 
-                # Make predictions
-                X_train = df_original.loc[:, Predictors_selected]
-                Y_train = df_original.loc[:, Response_selected]
-
-                if model_name == "Linear Regression" :
-                    model = LinearRegression()
-                    model.fit(X_train, Y_train)
-                    Y_pred = model.predict(new_data)
-                else :
-                    st.write('This model is not available yet')
+        if model_name == "Linear Regression" :
+            model = LinearRegression()
+            model.fit(X_train, Y_train)
+            Y_pred = model.predict(new_data)
+        else :
+            st.write('This model is not available yet')
                
-                st.write('Predicted output:', Y_pred[0])
+        st.write('Predicted output:', Y_pred[0])
 
 
     st.markdown("<br>", unsafe_allow_html=True)
