@@ -83,7 +83,7 @@ if file is not None:
 
             Models = [LinearRegression_Model, KNN_Model]
            
-            cross_validation = st.selectbox('Choose a cross validation algorithm', options=['Simple-NotRandom', 'Simple-Random'], key=3)
+            cross_validation = st.selectbox('Choose a cross validation algorithm', options=['Simple-NotRandom', 'Simple-Random'], key=4)
 
             if cross_validation == 'Simple-Random' :
 
