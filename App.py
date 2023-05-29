@@ -185,7 +185,7 @@ if file is not None:
             Final_Model.fit(X_train, Y_train)
             Y_pred = Final_Model.predict(new_data)
  
-            st.write('Predicted response:', str(Y_pred[0]))
+            st.write('Predicted response:', round(Y_pred[0],2))
 
 
     st.markdown("<br>", unsafe_allow_html=True)
