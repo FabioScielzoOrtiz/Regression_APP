@@ -114,6 +114,7 @@ if file is not None:
        
        st.markdown('### Model Selection by cross validation')
 
+       st.markdown('##### Hyperparameter tuning ?')
        hyperparameter_tuning = st.selectbox('Do you want hyperparameter tuning ?', options=['Yes', 'Not'], key=3)
 
        if hyperparameter_tuning == 'Not' :
@@ -135,7 +136,9 @@ if file is not None:
             ################################################################################
 
             Models = [LinearRegression_Model, KNN_Model]
-           
+            
+            st.markdown("<br>", unsafe_allow_html=True)
+            st.markdown('##### Cross Validation Algorithms')
             cross_validation = st.selectbox('Choose a cross validation algorithm', options=['Simple-NotRandom', 'Simple-Random'], key=7)
 
             if cross_validation == 'Simple-Random' :
