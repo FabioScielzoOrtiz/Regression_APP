@@ -138,7 +138,7 @@ if file is not None:
                     Random_Simple_Validation.predict()
                     MSE_Random_Simple_Validation.append( Random_Simple_Validation.compute_metric() )
 
-                print(MSE_Random_Simple_Validation)
+                st.write('MSE models:', MSE_Random_Simple_Validation)
 
  
 
