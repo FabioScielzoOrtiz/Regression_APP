@@ -133,7 +133,7 @@ if file is not None:
 
                 for model in Models :
                    
-                    Random_Simple_Validation = RandomSimpleValidation(k=0.75, metric='MSE', model=LinearRegression_Model, random_seed=123)
+                    Random_Simple_Validation = RandomSimpleValidation(k=0.75, metric='MSE', model=model, random_seed=123)
                     Random_Simple_Validation.fit(D=df_original, response_name=Response_selected)
                     Random_Simple_Validation.predict()
                     MSE_Random_Simple_Validation.append( Random_Simple_Validation.compute_metric() )
