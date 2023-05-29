@@ -124,7 +124,7 @@ if file is not None:
             LinearRegression_Model = LinearRegression()
  
             ## KNN
-            st.markdown('#### KNN Parameters')
+            st.markdown('KNN Parameters')
             n_neighbors = st.number_input('Enter the number of neighbors', min_value=1, step=1, value=10, key=4)
             metric = st.selectbox('Select the distance metric', options=['euclidean', 'manhattan', 'minkowski'], key=5)
             p = st.number_input('Enter the p value for Minkowski distance', min_value=1, step=1, value=2, key=6)
