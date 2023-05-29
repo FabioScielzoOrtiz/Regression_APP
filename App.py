@@ -105,13 +105,7 @@ if file is not None:
     if st.sidebar.checkbox('Make Predictions with the Model'):
 
       if st.button('Make Predictions'):
-        if Model == 'Linear Regression':
-            if 'model' not in locals():
-                st.warning("Please train the model first.")
-            elif 'X' not in locals():
-                st.warning("Please select predictors first.")
-            else:
-                # User input for new data
+
                 st.markdown('### Enter new data')
                 new_data = []
                 for predictor in Predictors_selected:
@@ -124,8 +118,7 @@ if file is not None:
                 # Make predictions
                 Y_pred = model.predict(new_data)
                 st.write('Predicted output:', Y_pred[0])
-        else:
-            st.error('Selected model is not available yet.')
+
 
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
