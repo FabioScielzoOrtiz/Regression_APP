@@ -179,14 +179,13 @@ if file is not None:
 
             X_train = df_original.loc[:, Predictors_selected]
             Y_train = df_original.loc[:, Response_selected]
+
+            Final_Model = RMSE_models_df_sort.iloc[0,0]
+            st.write('The model that will be used to predict is:', Final_Model)
+            Final_Model.fit(X_train, Y_train)
+            Y_pred = Final_Model.predict(new_data)
  
-            model = LinearRegression()
-               model.fit(X_train, Y_train)
-               Y_pred = model.predict(new_data)
-            else :
-               st.write('This model is not available yet')
-               
-            st.write('Predicted output:', Y_pred[0])
+            st.write('Predicted response:', Y_pred[0])
 
 
     st.markdown("<br>", unsafe_allow_html=True)
