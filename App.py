@@ -139,7 +139,7 @@ if file is not None:
 
             if cross_validation == 'Simple-Random' :
 
-                MSE_Random_Simple_Validation = []
+                RMSE_Random_Simple_Validation = []
 
                 for model in Models :
                    
