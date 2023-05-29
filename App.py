@@ -120,8 +120,20 @@ if file is not None:
 
        if hyperparameter_tuning == 'Not' :
             
+            ################################################################################
+
+            ## Linear Regression
             LinearRegression_Model = LinearRegression()
-            KNN_Model = KNeighborsRegressor(n_neighbors=10,  p=2, metric='minkowski')
+ 
+            ## KNN
+            st.markdown('### KNN Parameters')
+            n_neighbors = st.number_input('Enter the number of neighbors', min_value=1, step=1, value=10, key=4)
+            metric = st.selectbox('Select the distance metric', options=['euclidean', 'manhattan', 'minkowski'], key=5)
+            p = st.number_input('Enter the p value for Minkowski distance', min_value=1, step=1, value=2, key=6)
+
+            KNN_Model = KNeighborsRegressor(n_neighbors=n_neighbors, p=p, metric=metric)
+
+            ################################################################################
 
             Models = [LinearRegression_Model, KNN_Model]
            
@@ -139,11 +151,11 @@ if file is not None:
                     RMSE_Random_Simple_Validation.append( np.sqrt( Random_Simple_Validation.compute_metric() ) )
 
                 RMSE_models_df = pd.DataFrame({'Model' : Models, 'RMSE' : RMSE_Random_Simple_Validation})
+                RMSE_models_df_sort = RMSE_models_df.sort_values(by='RMSE', ascending=True)
 
-                st.write('RMSE models:', RMSE_models_df)
+                st.write('RMSE models:', RMSE_models_df_sort)
 
- 
-
+                st.write('The best model according to this validation method is', RMSE_models_df_sort.iloc[0,0])
 
 
  
@@ -168,8 +180,7 @@ if file is not None:
             X_train = df_original.loc[:, Predictors_selected]
             Y_train = df_original.loc[:, Response_selected]
  
-            if model_name == "Linear Regression" :
-               model = LinearRegression()
+            model = LinearRegression()
                model.fit(X_train, Y_train)
                Y_pred = model.predict(new_data)
             else :
