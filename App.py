@@ -8,6 +8,46 @@ import base64
 from sklearn.linear_model import LinearRegression
 from sklearn.neighbors import KNeighborsRegressor
 
+######################################################################################################################################
+
+class RandomSimpleValidation : 
+    # D --> have to be a pandas data frame.
+    # k --> is the proportion of observation of D that define D_train.
+    # response --> have to be a string with the name of the response variable.
+    # model --> object containing the initialized model to use.
+    # The function has been created thinking that the model to be used will be one from the `sklearn` library.
+    # metric --> It's the name of the validation metric.
+    # random_seed --> seed to replicate the random process.
+        
+    def __init__(self, k, metric, model, random_seed):
+        self.k = k
+        self.metric = metric
+        self.model = model
+        self.random_seed = random_seed   
+
+    def fit(self, D, response_name):         
+        N = len(D)
+        self.D_train = D.sample(frac=self.k, replace=False, random_state=self.random_seed)
+        self.D_test = D.drop( self.D_train.index , )
+        self.X_train = self.D_train.loc[: , self.D_train.columns != response_name]
+        self.Y_train = self.D_train.loc[: , response_name]
+        self.X_test = self.D_test.loc[: , self.D_test.columns != response_name]
+        self.Y_test = self.D_test.loc[: , response_name]
+        self.model.fit(self.X_train, self.Y_train)
+    
+    def predict(self):
+        self.Y_predict_test = self.model.predict(self.X_test)
+    
+    def compute_metric(self):    
+        if self.metric == 'MSE':
+            self.ECM_test = np.mean((self.Y_predict_test - self.Y_test) ** 2)
+            return self.ECM_test
+        elif self.metric == 'Accuracy':
+            self.TAC_test = np.mean((self.Y_predict_test == self.Y_test))
+            return self.TAC_test
+
+######################################################################################################################################       
+
 
 ###################################################################
 
@@ -37,7 +77,7 @@ if file is not None:
 
 ############################################################################    
 
-    if st.sidebar.checkbox('Table with the datae'):
+    if st.sidebar.checkbox('Table with the data'):
        
         st.markdown('### Table with the original data')
 
@@ -71,6 +111,8 @@ if file is not None:
 #####################################################################################################################################
 
     if st.sidebar.checkbox('Model Selection'):
+       
+       
 
        st.markdown('### Model Selection by cross validation')
 
@@ -91,12 +133,12 @@ if file is not None:
 
                 for model in Models :
                    
-                    RandomSimpleValidation = RandomSimpleValidation(k=0.75, metric='ECM', model=LinearRegression_Model, random_seed=123)
+                    RandomSimpleValidation = RandomSimpleValidation(k=0.75, metric='MSE', model=LinearRegression_Model, random_seed=123)
                     RandomSimpleValidation.fit(D=df_original, response_name=Response_selected)
                     RandomSimpleValidation.predict()
                     MSE_RandomSimpleValidation.append( RandomSimpleValidation.compute_metric() )
 
-                MSE_RandomSimpleValidation
+                print(MSE_RandomSimpleValidation)
 
  
 
